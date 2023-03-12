@@ -9,6 +9,108 @@
         "experience": "Experience"
       }
     },
+    "projects": [
+        {
+            "title":"AF arrhythmia detection in ECG Signals",
+            "description":"This is a part of research working at 2AI labs in the computer science department at University of South Dakota. Detection of AF arrhythmia in ECG signals using deep learning networks with spectral features",
+            "startDate":2023,
+            "images":[
+                "images/portfolio/ecg/p1.png"
+            ],
+            "url":"https://github.com/siddhi47/ecg-classification",
+            "technologies":[
+                {
+                    "class":"devicon-python-plain",
+                    "name":"Python"
+                },
+                {
+                    "class":"devicon-pytorch-plain",
+                    "name":"Pytorch"
+                }
+            ]
+        },
+        {
+        "title": "Pyspark Recommendation System",
+        "startDate": "2022",
+        "description": "This is a project done as a part of my masters course. The project is a recommendation system built using pyspark. The dataset used is the book recommendation dataset. The project uses cloud storage, mongodb, pyspark, and hdfs.",
+        "link": "https://github.com/siddhi47/pyspark-recommentation",
+        "images": [
+          "images/portfolio/pyspark_recommendation/p1.jpg"
+        ],
+        "url": "https://github.com/siddhi47/pyspark-recommentation",
+        "technologies": [
+          {
+            "class": "devicon-python-plain",
+            "name": "Python"
+          },
+          {
+            "class": "devicon-pyspark-plain",
+            "name": "Pyspark"
+          },
+          {
+            "class": "devicon-mongodb-plain",
+            "name": "MongoDB"
+          },
+          {
+            "class": "devicon-amazonwebservices-plain",
+            "name": "AWS"
+          }
+        ]
+      },
+        {
+            "title": "Multi Object Tracking",
+            "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware",
+            "link": "https://www.i8labs.com/",
+            "startDate":2021,
+            "images":[
+                "images/portfolio/multiobject_tracker/p1.jpg"
+            ],
+            "url":"https://www.i8labs.com",
+            "technologies":[
+                {
+                    "class":"devicon-python-plain",
+                    "name":"Python"
+                },
+                {
+                    "class":"devicon-opencv-plain",
+                    "name":"OpenCV"
+                },
+                {
+                    "class":"devicon-tensorflow-original",
+                    "name":"Tensorflow"
+                }
+            ]
+        },
+{
+            "title": "foneloan",
+            "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analasyses the financial transaction of the customers and makes a decision for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount.",
+            "link": "https://www.i8labs.com/",
+            "startDate":"2019-2021",
+            "images":[
+                "images/portfolio/foneloan/p1.jpg"
+            ],
+            "url":"https://www.i8labs.com",
+            "technologies":[
+                {
+                    "class":"devicon-python-plain",
+                    "name":"Python"
+                },
+                {
+                    "class":"devicon-scikitlearn-plain",
+                    "name":"Scikit-learn"
+                },
+                {
+                    "class":"devicon-mysql-plain",
+                    "name":"MySQL"
+                },
+                {
+                    "class":"devicon-pandas-original",
+                    "name":"Pandas"
+                }
+            ]
+        }
+              
+    ],
     "experience": [
       {
         "company": "Leapfrog Technology",

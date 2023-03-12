@@ -1,0 +1,59 @@
+{
+    "basic_info": {
+      "description_header": "Hi",
+      "description": "Hi! I am Siddhi",
+      "section_name": {
+        "about": "About me",
+        "projects": "Projects",
+        "skills": "Skills",
+        "experience": "Experience"
+      }
+    },
+    "experience": [
+      {
+        "company": "Leapfrog Technology",
+        "title": "Machine Learning Engineer",
+        "years": "08.2021 - 08.2022",
+        "mainTech": [
+          "Python 3"
+        ],
+        "technologies": [
+        "Docker",
+        "OpenCV",
+        "Tensorflow",
+        "Pytorch",
+        "MLFlow",
+        "Weights and Biases",
+        "Jetson Nano Develper kit",
+          "REST API (Flask)",
+          "YOLO",
+          "Object Tracking",
+          "Dash"
+        ]
+      },
+      {
+        "company": "Extensodata Pvt. Ltd.",
+        "title": "Data Scientist",
+        "years": "09.2018 - 08.2021",
+        "mainTech": [
+          "Python 3"
+        ],
+        "technologies": [
+            "Mysql",
+            "Apache superset",
+            "ETL",
+            "Pentaho",
+            "Airflow",
+            "Scikit learn",
+            "Machine learning",
+            "Pandas",
+            "Numpy",
+            "Matplotlib",
+            "Seaborn",
+            "Plotly",
+            "Data Visualization"
+
+        ]
+      }
+    ]
+  }

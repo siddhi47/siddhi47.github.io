@@ -112,6 +112,22 @@
               
     ],
     "experience": [
+{
+        "company": "University of South Dakota",
+        "title": "Graduate Research Assistant",
+        "years": "08.2022 - Present",
+        "mainTech": [
+          "Python 3"
+        ],
+        "technologies": [
+        "Latex",
+        "OpenCV",
+        "Tensorflow",
+        "Pytorch",
+        "Research",
+        "Computer Vision"
+        ]
+      },
       {
         "company": "Leapfrog Technology",
         "title": "Machine Learning Engineer",
@@ -121,6 +137,7 @@
         ],
         "technologies": [
         "Docker",
+        "Computer Vision",
         "OpenCV",
         "Tensorflow",
         "Pytorch",
@@ -130,7 +147,9 @@
           "REST API (Flask)",
           "YOLO",
           "Object Tracking",
-          "Dash"
+          "Dash",
+          "MLOps",
+          "Amazon Web Services"
         ]
       },
       {

@@ -68,6 +68,10 @@
             "name":"Docker",
             "class":"devicon-docker-plain",
             "level":89
+        },
+        {
+            "name":"VIM",
+            "class":"devicon-vim-plain"
         }
       ]
     }

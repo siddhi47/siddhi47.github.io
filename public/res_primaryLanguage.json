@@ -126,12 +126,11 @@
     {
             "title": "foneloan",
             "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analasyses the financial transaction of the customers and makes a decision for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount.",
-            "link": "https://www.i8labs.com/",
             "startDate":"2019-2021",
             "images":[
                 "images/portfolio/foneloan/p1.jpg"
             ],
-            "url":"https://www.i8labs.com",
+            "url":"https://foneloan.com.np/",
             "technologies":[
                 {
                     "class":"devicon-python-plain",

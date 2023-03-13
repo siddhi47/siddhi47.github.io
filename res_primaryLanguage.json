@@ -31,22 +31,7 @@
                 }
             ]
         },
-        {
-            "title":"Reinforcement Learning Toolkit",
-            "description":"This is a part of reinforcement learning course at University of South Dakota. This is a toolkit for reinforcement learning algorithms. It has implementation of Markov Decision Process from scratch. Other algorithms will be added soon.",
-            "startDate":2023,
-            "images":[
-                "images/portfolio/rl/p1.png"
-            ],
-            "startDate":2023,
-            "url":"https://github.com/siddhi47/reinforcement-learning",
-            "technologies":[
-                {
-                    "class":"devicon-python-plain",
-                    "name":"Python"
-                }
-            ]
-        },
+        
         {
         "title": "Pyspark Recommendation System",
         "startDate": "2022",
@@ -77,7 +62,7 @@
       },
         {
             "title": "Multi Object Tracking",
-            "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware",
+            "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware. Image from https://developer.nvidia.cn ",
             "link": "https://www.i8labs.com/",
             "startDate":2021,
             "images":[
@@ -101,10 +86,11 @@
         },
         {
             "title": "Nepalese PAN document extractor",
-            "description": "This is a pan document extractor built using opencv and tesseract. The project uses opencv and tesseract to extract the pan document from the image and dumps the extracted data into MySQL database.",
+            "description": "This is a pan document extractor built using opencv and tesseract. The project uses opencv and tesseract to extract the pan document from the image and dumps the extracted data into MySQL database. Image from https://myrepublica.nagariknetwork.com",
             "link": "https://github.com/siddhi47/Nepalese-PAN-extraction",
             "startDate":2021,
             "images":[
+                "images/portfolio/pan/p1.png"
             ],
 
             "url": "https://github.com/siddhi47/Nepalese-PAN-extraction",
@@ -125,13 +111,12 @@
         },
     {
             "title": "foneloan",
-            "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analasyses the financial transaction of the customers and makes a decision for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount.",
-            "link": "https://www.i8labs.com/",
+            "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analasyses the financial transaction of the customers and makes a decision for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount. Image from https://foneloan.com.np/" ,
             "startDate":"2019-2021",
             "images":[
                 "images/portfolio/foneloan/p1.jpg"
             ],
-            "url":"https://www.i8labs.com",
+            "url":"https://foneloan.com.np/",
             "technologies":[
                 {
                     "class":"devicon-python-plain",
@@ -151,47 +136,17 @@
                 }
             ]
         },
-       {
-        "title": "Cursor control using head and eye movement",
-        "description": "This is a project we did for the LITE competition held in Kantipur Engineering college. The project is a cursor control system built using opencv and python. The project uses a webcam to track the head and eye movement of the user and control the cursor accordingly.",
-        "link": "https://github.com/siddhi47/Cursor-Control-using-Eye-Movement",
-        "startDate":"2018",
-        "images":[
-            "https://www.vectorlogo.zone/logos/opencv/opencv-ar21.svg"
-        ],
-        "url":"https://github.com/siddhi47/Cursor-Control-using-Eye-Movement",
-        "technologies":[
-            {
-                "class":"devicon-python-plain",
-                "name":"Python"
-            },
-            {
-                "class":"devicon-opencv-plain",
-                "name":"OpenCV"
-            }
-        ]
-    },
-    {
-        "title": "Digital voting system using ethereum",
-        "description": "This is a ethereum based voting system built using solidity and django. The project was done as a part of Engineering degree course. The project uses ethereum blockchain to store the votes and django to build the frontend.",
-        "link": "https://bitbucket.org/siddhi47/ethereumvoting/src/master/voting/",
-        "startDate":"2018",
-        "images":[
-            "https://ethereum.org/static/c3bcc8c47890ffd2a2c329972c73d0fd/e018d/ethereum-logo-portrait-black-gray.png"
-        ],
-
-        "url": "https://bitbucket.org/siddhi47/ethereumvoting/src/master/voting/",
-        "technologies":[
-            {
-                "class":"devicon-python-plain",
-                "name":"Python"
-            },
-            {
-                "class":"devicon-django-plain",
-                "name":"Django"
-            }
-        ]
-    }      
+        {
+            "title":"Other Projects",
+            "description":"Other projects I have worked on",
+            "images":[
+                "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            ],
+            "startDate":"All time projects",
+            "url":"https://github.com/siddhi47/siddhi47/blob/main/projects.md"
+            
+        }
+          
     ],
     "experience": [
 {

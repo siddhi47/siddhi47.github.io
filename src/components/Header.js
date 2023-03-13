@@ -16,6 +16,15 @@ class Header extends Component {
     this.setTheme();
   }
 
+  getYearsOfExperience() {
+    const today = new Date();
+    const start = new Date(2018, 8, 9);
+    const diff = today - start;
+    const years = Math.floor(diff / 31557600000);
+
+    return years + "+ years of experience";
+    }
+
   setTheme() {
     var dataThemeAttribute = "data-theme";
     var body = document.body;
@@ -28,6 +37,7 @@ class Header extends Component {
     if (this.props.sharedData) {
       var name = this.props.sharedData.name;
       this.titles = this.props.sharedData.titles.map(x => [ x.toUpperCase(), 1500 ] ).flat();
+      
     }
 
     const HeaderTitleTypeAnimation = React.memo( () => {
@@ -38,12 +48,16 @@ class Header extends Component {
       <header id="home" style={{ height: window.innerHeight - 140, display: 'block' }}>
         <div className="row aligner" style={{height: '100%'}}>
           <div className="col-md-12">
+
             <div>
               <span className="iconify header-icon" data-icon="la:laptop-code" data-inline="false"></span>
               <br/>
               <h1 className="mb-0">
                 <Typical steps={[name]} wrapper="p" />
               </h1>
+                <h2 className="mb-5">
+                <yearsofexperience>{this.getYearsOfExperience()}</yearsofexperience>
+                </h2>
               <div className="title-container">
                 <HeaderTitleTypeAnimation />
               </div>

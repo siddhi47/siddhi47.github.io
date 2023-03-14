@@ -1,7 +1,7 @@
 {
     "basic_info": {
       "description_header": "Hi",
-      "description": "Hi! I am Siddhi. I have 4 years of industry experience working with end to end machine learning projects. During the 4 years, I had opportunity to work directly with clients and lead a team of 2-4 ML engineers. My passion is rooted in computer vision and its applications and I aspire to work in a competitive and cross-functional research and development team",
+      "description": "Hi! I am Siddhi. I have 4 years of industry experience working with end to end machine learning projects. During the 4 years, I had opportunity to work directly with clients and lead a team of 2-4 ML engineers. My passion is rooted in computer vision and its applications and I aspire to work in a competitive and cross-functional research and development team.",
       "phone":"+1 (605) 728-6309",
         "email":"siddhikiran.bajracharya@gmail.com",
       "section_name": {
@@ -62,7 +62,7 @@
       },
         {
             "title": "Multi Object Tracking",
-            "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware. Image from https://developer.nvidia.cn ",
+            "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware. Image from https://developer.nvidia.cn. ",
             "link": "https://www.i8labs.com/",
             "startDate":2021,
             "images":[
@@ -75,7 +75,7 @@
                     "name":"Python"
                 },
                 {
-                    "class":"devicon-opencv-plain",
+                    "class":"devicon-opencv-plain",.
                     "name":"OpenCV"
                 },
                 {
@@ -86,7 +86,7 @@
         },
         {
             "title": "Nepalese PAN document extractor",
-            "description": "This is a pan document extractor built using opencv and tesseract. The project uses opencv and tesseract to extract the pan document from the image and dumps the extracted data into MySQL database. Image from https://myrepublica.nagariknetwork.com",
+            "description": "This is a pan document extractor built using opencv and tesseract. The project uses opencv and tesseract to extract the pan document from the image and dumps the extracted data into MySQL database. Image from https://myrepublica.nagariknetwork.com.",
             "link": "https://github.com/siddhi47/Nepalese-PAN-extraction",
             "startDate":2021,
             "images":[
@@ -111,7 +111,7 @@
         },
     {
             "title": "foneloan",
-            "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analasyses the financial transaction of the customers and makes a decision for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount. Image from https://foneloan.com.np/" ,
+            "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analyses the financial transaction of the customers and makes decisions for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount. Image from https://foneloan.com.np/." ,
             "startDate":"2019-2021",
             "images":[
                 "images/portfolio/foneloan/p1.jpg"
@@ -138,7 +138,7 @@
         },
         {
             "title":"Other Projects",
-            "description":"Other projects I have worked on",
+            "description":"Other projects I have worked on.",
             "images":[
                 "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
             ],

@@ -17,7 +17,6 @@ class About extends Component {
       var hello = this.props.resumeBasicInfo.description_header;
       var about = this.props.resumeBasicInfo.description;
       var email = this.props.resumeBasicInfo.email;
-        var phone = this.props.resumeBasicInfo.phone;
     }
 
     return (
@@ -95,8 +94,9 @@ class About extends Component {
                     <span className="wave">{hello} :) </span>
                     <br />
                     <br />
-                    {about}<br /><strong>Email</strong>: <i>{email}</i><br /><strong> Phone</strong>: <i>{phone}</i>
-                  </div>
+                    {about}<br /><strong>Email</strong>: <i>{email}</i><br />                 
+          </div>
+
                 </div>
               </div>
             </div>

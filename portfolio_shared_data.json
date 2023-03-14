@@ -12,6 +12,11 @@
           "name": "linkedin",
           "url": "https://www.linkedin.com/in/siddhi-kiran-b-a6101b139",
           "class": "fab fa-linkedin"
+        },
+        {
+            "name":"Email",
+            "url":"mailto:siddhikiran.bajracharya@gmail.com",
+            "class":"fa fa-envelope"
         }
       ],
       "image": "myProfile.jpg"

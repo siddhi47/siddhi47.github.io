@@ -17,6 +17,11 @@
             "name":"Email",
             "url":"mailto:siddhikiran.bajracharya@gmail.com",
             "class":"fa fa-envelope"
+        },
+        {
+            "name":"Hashnode",
+            "url":"siddhibajracharya.hashnode.dev",
+            "class":"fab fa-hashnode"
         }
       ],
       "image": "myProfile.jpg"

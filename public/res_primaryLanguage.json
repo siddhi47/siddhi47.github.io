@@ -13,8 +13,8 @@
     },
     "projects": [
         {
-            "title":"AF arrhythmia detection in ECG Signals",
-            "description":"This is a part of research working at 2AI labs in the computer science department at University of South Dakota. Detection of AF arrhythmia in ECG signals using deep learning networks with spectral features",
+            "title":"AF arrhythmia detection in ECG Signals (IEEE CAI 2023 Conference)",
+            "description":"This is a part of research working at 2AI labs in the computer science department at University of South Dakota. Detection of AF arrhythmia in ECG signals using deep learning networks with spectral features. This work has been published in IEEE CAI 2023 Conference",
             "startDate":2023,
             "images":[
                 "images/portfolio/ecg/p1.png"

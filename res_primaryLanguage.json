@@ -1,178 +1,198 @@
 {
-    "basic_info": {
-      "description_header": "Hi",
-      "description": "Hi! I am Siddhi. I have 4 years of industry experience working with end to end machine learning projects. During the 4 years, I had opportunity to work directly with clients and lead a team of 2-4 ML engineers. My passion is rooted in computer vision and its applications and I aspire to work in a competitive and cross-functional research and development team.",
-        "email":"siddhikiran.bajracharya@gmail.com",
-        "blog":"https://siddhibajracharya.hashnode.dev",
-      "section_name": {
-        "about": "About me",
-        "projects": "Projects",
-        "skills": "Skills",
-        "experience": "Experience"
-      }
-    },
-    "projects": [
-        {
-            "title":"AF arrhythmia detection in ECG Signals (IEEE CAI 2023 Conference)",
-            "description":"This is a part of research working at 2AI labs in the computer science department at University of South Dakota. Detection of AF arrhythmia in ECG signals using deep learning networks with spectral features. This work has been published in IEEE CAI 2023 Conference",
-            "startDate":2023,
-            "images":[
-                "images/portfolio/ecg/p1.png"
-            ],
-            "url":"https://github.com/siddhi47/ecg-classification",
-            "technologies":[
-                {
-                    "class":"devicon-python-plain",
-                    "name":"Python"
-                },
-                {
-                    "class":"devicon-pytorch-plain",
-                    "name":"Pytorch"
-                }
-            ]
-        },
-        
-        {
-        "title": "Pyspark Recommendation System",
-        "startDate": "2022",
-        "description": "This is a project done as a part of my masters course. The project is a recommendation system built using pyspark. The dataset used is the book recommendation dataset. The project uses cloud storage, mongodb, pyspark, and hdfs.",
-        "link": "https://github.com/siddhi47/pyspark-recommentation",
-        "images": [
-          "images/portfolio/pyspark_recommendation/p1.jpg"
-        ],
-        "url": "https://github.com/siddhi47/pyspark-recommentation",
-        "technologies": [
-          {
-            "class": "devicon-python-plain",
-            "name": "Python"
-          },
-          {
-            "class": "devicon-pyspark-plain",
-            "name": "Pyspark"
-          },
-          {
-            "class": "devicon-mongodb-plain",
-            "name": "MongoDB"
-          },
-          {
-            "class": "devicon-amazonwebservices-plain",
-            "name": "AWS"
-          }
-        ]
-      },
-        {
-            "title": "Multi Object Tracking",
-            "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware. Image from https://developer.nvidia.cn. ",
-            "link": "https://www.i8labs.com/",
-            "startDate":2021,
-            "images":[
-                "https://developer.nvidia.cn/sites/default/files/akamai/embedded/images/jetsonNano/JetsonNano-DevKit_Front-Top_Right_trimmed.jpg"
-            ],
-            "url":"https://www.i8labs.com",
-            "technologies":[
-                {
-                    "class":"devicon-python-plain",
-                    "name":"Python"
-                },
-                {
-                    "class":"devicon-opencv-plain",
-                    "name":"OpenCV"
-                },
-                {
-                    "class":"devicon-tensorflow-original",
-                    "name":"Tensorflow"
-                }
-            ]
-        },
-        {
-            "title": "Nepalese PAN document extractor",
-            "description": "This is a pan document extractor built using opencv and tesseract. The project uses opencv and tesseract to extract the pan document from the image and dumps the extracted data into MySQL database. Image from https://myrepublica.nagariknetwork.com.",
-            "link": "https://github.com/siddhi47/Nepalese-PAN-extraction",
-            "startDate":2021,
-            "images":[
-                "images/portfolio/pan/p1.png"
-            ],
-
-            "url": "https://github.com/siddhi47/Nepalese-PAN-extraction",
-            "technologies":[
-                {
-                    "class":"devicon-python-plain",
-                    "name":"Python"
-                },
-                {
-                    "class":"devicon-opencv-plain",
-                    "name":"OpenCV"
-                },
-                {
-                    "class":"devicon-tensorflow-original",
-                    "name":"Tensorflow"
-                }
-            ]
-        },
+  "basic_info": {
+    "description_header": "Hi",
+    "description": "Hi! I am Siddhi. I have 4 years of industry experience working with end to end machine learning projects. During the 4 years, I had opportunity to work directly with clients and lead a team of 2-4 ML engineers. My passion is rooted in computer vision and its applications and I aspire to work in a competitive and cross-functional research and development team.",
+    "email": "siddhikiran.bajracharya@gmail.com",
+    "blog": "https://siddhibajracharya.hashnode.dev",
+    "section_name": {
+      "about": "About me",
+      "projects": "Projects",
+      "skills": "Skills",
+      "experience": "Experience"
+    }
+  },
+  "projects": [
     {
-            "title": "foneloan",
-            "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analyses the financial transaction of the customers and makes decisions for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount. Image from https://foneloan.com.np/." ,
-            "startDate":"2019-2021",
-            "images":[
-                "images/portfolio/foneloan/p1.jpg"
-            ],
-            "url":"https://foneloan.com.np/",
-            "technologies":[
-                {
-                    "class":"devicon-python-plain",
-                    "name":"Python"
-                },
-                {
-                    "class":"devicon-scikitlearn-plain",
-                    "name":"Scikit-learn"
-                },
-                {
-                    "class":"devicon-mysql-plain",
-                    "name":"MySQL"
-                },
-                {
-                    "class":"devicon-pandas-original",
-                    "name":"Pandas"
-                }
-            ]
+      "title": "AF arrhythmia detection in ECG Signals (IEEE CAI 2023 Conference)",
+      "description": "This is a part of research working at 2AI labs in the computer science department at University of South Dakota. Detection of AF arrhythmia in ECG signals using deep learning networks with spectral features. This work has been published in IEEE CAI 2023 Conference",
+      "startDate": 2023,
+      "images": [
+        "images/portfolio/ecg/p1.png"
+      ],
+      "url": "https://github.com/siddhi47/ecg-classification",
+      "technologies": [
+        {
+          "class": "devicon-python-plain",
+          "name": "Python"
         },
         {
-            "title":"Other Projects",
-            "description":"Other projects I have worked on.",
-            "images":[
-                "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-            ],
-            "startDate":"All time projects",
-            "url":"https://github.com/siddhi47/siddhi47/blob/main/projects.md"
-            
+          "class": "devicon-pytorch-plain",
+          "name": "Pytorch"
         }
-          
-    ],
-    "experience": [
-{
-        "company": "University of South Dakota",
-        "title": "Graduate Research Assistant",
-        "years": "08.2022 - Present",
-        "mainTech": [
-          "Python 3"
-        ],
-        "technologies": [
+      ]
+    },
+    {
+      "title": "Pyspark Recommendation System",
+      "startDate": "2022",
+      "description": "This is a project done as a part of my masters course. The project is a recommendation system built using pyspark. The dataset used is the book recommendation dataset. The project uses cloud storage, mongodb, pyspark, and hdfs.",
+      "link": "https://github.com/siddhi47/pyspark-recommentation",
+      "images": [
+        "images/portfolio/pyspark_recommendation/p1.jpg"
+      ],
+      "url": "https://github.com/siddhi47/pyspark-recommentation",
+      "technologies": [
+        {
+          "class": "devicon-python-plain",
+          "name": "Python"
+        },
+        {
+          "class": "devicon-pyspark-plain",
+          "name": "Pyspark"
+        },
+        {
+          "class": "devicon-mongodb-plain",
+          "name": "MongoDB"
+        },
+        {
+          "class": "devicon-amazonwebservices-plain",
+          "name": "AWS"
+        }
+      ]
+    },
+    {
+      "title": "Multi Object Tracking",
+      "description": "I worked on this project while working at leapfrog technologies. The project is a multi object tracking system built using jetson nano developer kit. The project uses deepsort, yolov3, and opencv. I worked mostly on the core tracking module and interfacing with the hardware. Image from https://developer.nvidia.cn. ",
+      "link": "https://www.i8labs.com/",
+      "startDate": 2021,
+      "images": [
+        "https://developer.nvidia.cn/sites/default/files/akamai/embedded/images/jetsonNano/JetsonNano-DevKit_Front-Top_Right_trimmed.jpg"
+      ],
+      "url": "https://www.i8labs.com",
+      "technologies": [
+        {
+          "class": "devicon-python-plain",
+          "name": "Python"
+        },
+        {
+          "class": "devicon-opencv-plain",
+          "name": "OpenCV"
+        },
+        {
+          "class": "devicon-tensorflow-original",
+          "name": "Tensorflow"
+        }
+      ]
+    },
+    {
+      "title": "Nepalese PAN document extractor",
+      "description": "This is a pan document extractor built using opencv and tesseract. The project uses opencv and tesseract to extract the pan document from the image and dumps the extracted data into MySQL database. Image from https://myrepublica.nagariknetwork.com.",
+      "link": "https://github.com/siddhi47/Nepalese-PAN-extraction",
+      "startDate": 2021,
+      "images": [
+        "images/portfolio/pan/p1.png"
+      ],
+      "url": "https://github.com/siddhi47/Nepalese-PAN-extraction",
+      "technologies": [
+        {
+          "class": "devicon-python-plain",
+          "name": "Python"
+        },
+        {
+          "class": "devicon-opencv-plain",
+          "name": "OpenCV"
+        },
+        {
+          "class": "devicon-tensorflow-original",
+          "name": "Tensorflow"
+        }
+      ]
+    },
+    {
+      "title": "foneloan",
+      "description": "This is a big project I was a part of when I was working at Extensodata. It is a software that analyses the financial transaction of the customers and makes decisions for credit approval. By integrating foneloan with the banking software, the customer can get pre approved loans up to a certain amount. Image from https://foneloan.com.np/.",
+      "startDate": "2019-2021",
+      "images": [
+        "images/portfolio/foneloan/p1.jpg"
+      ],
+      "url": "https://foneloan.com.np/",
+      "technologies": [
+        {
+          "class": "devicon-python-plain",
+          "name": "Python"
+        },
+        {
+          "class": "devicon-scikitlearn-plain",
+          "name": "Scikit-learn"
+        },
+        {
+          "class": "devicon-mysql-plain",
+          "name": "MySQL"
+        },
+        {
+          "class": "devicon-pandas-original",
+          "name": "Pandas"
+        }
+      ]
+    },
+    {
+      "title": "Other Projects",
+      "description": "Other projects I have worked on.",
+      "images": [
+        "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+      ],
+      "startDate": "All time projects",
+      "url": "https://github.com/siddhi47/siddhi47/blob/main/projects.md"
+    }
+  ],
+  "experience": [
+    {
+      "company": "I8labs inc",
+      "title": "Senior Machine Learning Engineer",
+      "years": "02.2024 - Present",
+      "mainTech": [
+        "Python 3",
+        "Computer Vision"
+      ],
+      "technologies": [
+        "Edge AI",
+        "Docker",
+        "Computer Vision",
+        "OpenCV",
+        "Tensorflow",
+        "Pytorch",
+        "MLFlow",
+        "Weights and Biases",
+        "REST API (Flask)",
+        "YOLO",
+        "Object Tracking",
+        "MLOps",
+        "Amazon Web Services"
+      ]
+    },
+    {
+      "company": "University of South Dakota",
+      "title": "Graduate Research Assistant",
+      "years": "08.2022 - 12.2023",
+      "mainTech": [
+        "Python 3"
+      ],
+      "technologies": [
         "Latex",
         "OpenCV",
         "Tensorflow",
         "Pytorch",
         "Research",
         "Computer Vision"
-        ]
-      },
-      {
-        "company": "Leapfrog Technology",
-        "title": "Machine Learning Engineer",
-        "years": "08.2021 - 08.2022",
-        "mainTech": [
-          "Python 3"
-        ],
-        "technologies": [
+      ]
+    },
+    {
+      "company": "Leapfrog Technology",
+      "title": "Machine Learning Engineer",
+      "years": "08.2021 - 08.2022",
+      "mainTech": [
+        "Python 3"
+      ],
+      "technologies": [
         "Docker",
         "Computer Vision",
         "OpenCV",
@@ -181,37 +201,36 @@
         "MLFlow",
         "Weights and Biases",
         "Jetson Nano Develper kit",
-          "REST API (Flask)",
-          "YOLO",
-          "Object Tracking",
-          "Dash",
-          "MLOps",
-          "Amazon Web Services"
-        ]
-      },
-      {
-        "company": "Extensodata Pvt. Ltd.",
-        "title": "Data Scientist",
-        "years": "09.2018 - 08.2021",
-        "mainTech": [
-          "Python 3"
-        ],
-        "technologies": [
-            "Mysql",
-            "Apache superset",
-            "ETL",
-            "Pentaho",
-            "Airflow",
-            "Scikit learn",
-            "Machine learning",
-            "Pandas",
-            "Numpy",
-            "Matplotlib",
-            "Seaborn",
-            "Plotly",
-            "Data Visualization"
-
-        ]
-      }
-    ]
-  }
+        "REST API (Flask)",
+        "YOLO",
+        "Object Tracking",
+        "Dash",
+        "MLOps",
+        "Amazon Web Services"
+      ]
+    },
+    {
+      "company": "Extensodata Pvt. Ltd.",
+      "title": "Data Scientist",
+      "years": "09.2018 - 08.2021",
+      "mainTech": [
+        "Python 3"
+      ],
+      "technologies": [
+        "Mysql",
+        "Apache superset",
+        "ETL",
+        "Pentaho",
+        "Airflow",
+        "Scikit learn",
+        "Machine learning",
+        "Pandas",
+        "Numpy",
+        "Matplotlib",
+        "Seaborn",
+        "Plotly",
+        "Data Visualization"
+      ]
+    }
+  ]
+}

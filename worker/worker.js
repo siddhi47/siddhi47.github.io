@@ -86,6 +86,7 @@ const ALLOWED_ORIGINS = [
 const RATE_LIMIT = 20;
 const RATE_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 const rateLimitMap = new Map();
+const verifiedSessions = new Set();
 
 function isRateLimited(ip) {
   const now = Date.now();
@@ -214,23 +215,32 @@ export default {
     try {
       const { messages, visitor, sessionId, turnstileToken } = await request.json();
 
-      // Verify Turnstile on first message of a session
-      if (turnstileToken && env.TURNSTILE_SECRET_KEY) {
-        const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            secret: env.TURNSTILE_SECRET_KEY,
-            response: turnstileToken,
-            remoteip: clientIP,
-          }),
-        });
-        const verifyData = await verifyRes.json();
-        if (!verifyData.success) {
-          return new Response(JSON.stringify({ error: 'Captcha verification failed.' }), {
-            status: 403,
-            headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+      // Verify Turnstile captcha — required for all sessions
+      if (env.TURNSTILE_SECRET_KEY) {
+        if (!verifiedSessions.has(sessionId)) {
+          if (!turnstileToken) {
+            return new Response(JSON.stringify({ error: 'Captcha required.' }), {
+              status: 403,
+              headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+            });
+          }
+          const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              secret: env.TURNSTILE_SECRET_KEY,
+              response: turnstileToken,
+              remoteip: clientIP,
+            }),
           });
+          const verifyData = await verifyRes.json();
+          if (!verifyData.success) {
+            return new Response(JSON.stringify({ error: 'Captcha verification failed.' }), {
+              status: 403,
+              headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+            });
+          }
+          verifiedSessions.add(sessionId);
         }
       }
 

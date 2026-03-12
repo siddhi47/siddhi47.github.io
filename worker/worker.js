@@ -3,11 +3,16 @@
 
 const RESUME_URL = 'https://siddhibajracharya.com.np/resume.pdf';
 
-const SYSTEM_PROMPT = `You ARE Siddhi Kiran Bajracharya. Speak in first person ("I", "my", "me"). You're chatting with visitors on your portfolio website. Be friendly, casual, and conversational — like texting a colleague. Keep responses concise (2-3 sentences unless more detail is asked for). If asked something you genuinely don't know or that isn't covered in your resume, be honest and say "I'd love to chat more about that — feel free to email me!"
+const SYSTEM_PROMPT = `You ARE Siddhi Kiran Bajracharya. Speak in first person ("I", "my", "me"). You're chatting with visitors on your portfolio website. Be friendly, casual, and conversational — like texting a colleague. Keep responses concise (2-3 sentences unless more detail is asked for).
 
 Your resume is attached as a PDF. Use it as your source of truth for all details about your experience, education, skills, and projects.
 
-Never break character. Never say you are an AI, a language model, or a chatbot.`;
+STRICT RULES:
+- ONLY answer questions about your professional life: work experience, skills, projects, education, and tech interests.
+- For ANY personal questions (relationships, age, religion, politics, personal life, family, etc.), respond with: "I'd rather keep things professional here! Feel free to ask about my work, skills, or projects."
+- Never make up personal information. Never speculate about things not in your resume.
+- If asked something not covered in your resume, say: "That's not something I've covered here — feel free to email me at siddhikiran.bajracharya@gmail.com!"
+- Never break character. Never say you are an AI, a language model, or a chatbot.`;
 
 const ALLOWED_ORIGINS = [
   'https://siddhibajracharya.com.np',
@@ -15,6 +20,32 @@ const ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://127.0.0.1:8000',
 ];
+
+// Rate limiting: 20 requests per IP per day
+const RATE_LIMIT = 20;
+const RATE_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+const rateLimitMap = new Map();
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  // Clean up old entries periodically
+  if (rateLimitMap.size > 10000) {
+    for (const [key, val] of rateLimitMap) {
+      if (now - val.start > RATE_WINDOW_MS) rateLimitMap.delete(key);
+    }
+  }
+
+  if (!entry || now - entry.start > RATE_WINDOW_MS) {
+    rateLimitMap.set(ip, { count: 1, start: now });
+    return false;
+  }
+
+  entry.count++;
+  if (entry.count > RATE_LIMIT) return true;
+  return false;
+}
 
 // Cache the resume PDF base64 in memory (persists per worker instance)
 let cachedResumeBase64 = null;
@@ -66,6 +97,15 @@ export default {
       return new Response('Method not allowed', { status: 405, headers: corsHeaders(origin) });
     }
 
+    // Rate limit by IP
+    const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (isRateLimited(clientIP)) {
+      return new Response(JSON.stringify({ error: 'Rate limit exceeded. Try again tomorrow!' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+      });
+    }
+
     try {
       const { messages } = await request.json();
 
@@ -75,6 +115,12 @@ export default {
           headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
         });
       }
+
+      // Truncate each message to 500 chars to prevent token abuse
+      const sanitizedMessages = messages.map(m => ({
+        role: m.role === 'assistant' ? 'assistant' : 'user',
+        content: typeof m.content === 'string' ? m.content.slice(0, 500) : '',
+      }));
 
       // Build system message with resume PDF if available
       const resumeBase64 = await getResumeBase64();
@@ -106,7 +152,7 @@ export default {
         },
         body: JSON.stringify({
           model: 'gpt-4o-mini',
-          messages: [systemMessage, ...messages],
+          messages: [systemMessage, ...sanitizedMessages],
           max_tokens: 300,
           temperature: 0.7,
         }),

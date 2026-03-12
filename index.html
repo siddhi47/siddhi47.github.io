@@ -1181,7 +1181,7 @@
     <div class="chat-msg bot">Hey! I'm Siddhi. Ask me anything about my work, skills, or projects.</div>
   </div>
   <div class="chat-input-area">
-    <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off" />
+    <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off" maxlength="500" />
     <button class="chat-send" id="chatSend" onclick="sendMessage()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
@@ -1252,7 +1252,9 @@
       const data = await res.json();
       removeTyping();
 
-      if (data.reply) {
+      if (res.status === 429) {
+        addMessage("You've used all your messages for today. Feel free to email me at siddhikiran.bajracharya@gmail.com!", 'bot');
+      } else if (data.reply) {
         addMessage(data.reply, 'bot');
         chatHistory.push({ role: 'assistant', content: data.reply });
       } else {

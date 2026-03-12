@@ -146,9 +146,25 @@
   ],
   "experience": [
     {
+      "company": "Onramp",
+      "title": "Member of Technical Staff",
+      "years": "09.2025 - Present",
+      "mainTech": [
+        "Go",
+        "Python"
+      ],
+      "technologies": [
+        "Go",
+        "Python",
+        "Kubernetes",
+        "Data Pipelines",
+        "Machine Learning"
+      ]
+    },
+    {
       "company": "I8labs inc",
       "title": "Senior Machine Learning Engineer",
-      "years": "02.2024 - Present",
+      "years": "02.2024 - 09.2025",
       "mainTech": [
         "Python 3",
         "Computer Vision"

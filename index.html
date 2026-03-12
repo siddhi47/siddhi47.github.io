@@ -25,6 +25,7 @@
   <link rel="canonical" href="https://siddhibajracharya.com.np" />
   <link rel="icon" href="/favicon.png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -765,6 +766,47 @@
     .chat-input::placeholder { color: var(--text-muted); }
     .chat-input:focus { border-color: var(--accent); }
 
+    .chat-contact-form {
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+      justify-content: center;
+    }
+    .chat-contact-form p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .chat-contact-form input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .chat-contact-form input::placeholder { color: var(--text-muted); }
+    .chat-contact-form input:focus { border-color: var(--accent); }
+    .chat-contact-form .chat-start-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--transition);
+    }
+    .chat-contact-form .chat-start-btn:hover { opacity: 0.9; }
+    .chat-contact-form .chat-start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
     .chat-send {
       background: var(--accent);
       border: none;
@@ -1216,10 +1258,18 @@
       <p>AI-powered</p>
     </div>
   </div>
-  <div class="chat-messages" id="chatMessages">
+  <div class="chat-contact-form" id="chatContactForm">
+    <p>Before we chat, drop your name and email so I can follow up if needed.</p>
+    <p style="font-size:0.75rem; opacity:0.7;">Please avoid sharing personal or sensitive information. Chat history is stored for future reference.</p>
+    <input type="text" id="chatName" placeholder="Your name" autocomplete="name" />
+    <input type="email" id="chatEmail" placeholder="Your email" autocomplete="email" />
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAACp3XZq1z84bmQu8" data-theme="auto" data-size="compact"></div>
+    <button class="chat-start-btn" id="chatStartBtn" onclick="startChat()">Start chatting</button>
+  </div>
+  <div class="chat-messages" id="chatMessages" style="display:none">
     <div class="chat-msg bot">Hey! I'm Siddhi. Ask me anything about my work, skills, or projects.</div>
   </div>
-  <div class="chat-input-area">
+  <div class="chat-input-area" id="chatInputArea" style="display:none">
     <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off" maxlength="500" />
     <button class="chat-send" id="chatSend" onclick="sendMessage()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -1234,14 +1284,57 @@
 
   let chatHistory = [];
   let chatOpen = false;
+  let chatStarted = false;
+  let visitorName = '';
+  let visitorEmail = '';
+  let sessionId = '';
 
   function toggleChat() {
     chatOpen = !chatOpen;
     document.getElementById('chatWindow').classList.toggle('open', chatOpen);
     document.getElementById('chatIconOpen').style.display = chatOpen ? 'none' : 'block';
     document.getElementById('chatIconClose').style.display = chatOpen ? 'block' : 'none';
-    if (chatOpen) document.getElementById('chatInput').focus();
+    if (chatOpen) {
+      if (chatStarted) {
+        document.getElementById('chatInput').focus();
+      } else {
+        document.getElementById('chatName').focus();
+      }
+    }
   }
+
+  let turnstileToken = '';
+
+  function startChat() {
+    const name = document.getElementById('chatName').value.trim();
+    const email = document.getElementById('chatEmail').value.trim();
+    if (!name || !email) return;
+
+    const tokenInput = document.querySelector('[name="cf-turnstile-response"]');
+    turnstileToken = tokenInput ? tokenInput.value : '';
+    if (!turnstileToken) {
+      alert('Please complete the verification.');
+      return;
+    }
+
+    visitorName = name;
+    visitorEmail = email;
+    sessionId = email.replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now();
+    chatStarted = true;
+
+    document.getElementById('chatContactForm').style.display = 'none';
+    document.getElementById('chatMessages').style.display = 'flex';
+    document.getElementById('chatInputArea').style.display = 'flex';
+    document.getElementById('chatInput').focus();
+  }
+
+  // Allow Enter to submit the contact form
+  document.getElementById('chatEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); startChat(); }
+  });
+  document.getElementById('chatName').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); document.getElementById('chatEmail').focus(); }
+  });
 
   function addMessage(text, sender) {
     const messages = document.getElementById('chatMessages');
@@ -1285,7 +1378,7 @@
       const res = await fetch(CHAT_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: chatHistory.slice(-10) }),
+        body: JSON.stringify({ messages: chatHistory.slice(-10), visitor: { name: visitorName, email: visitorEmail }, sessionId, turnstileToken }),
       });
 
       const data = await res.json();

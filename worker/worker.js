@@ -1,5 +1,9 @@
 // Cloudflare Worker - OpenAI Chat Proxy
-// Deploy this to Cloudflare Workers and set OPENAI_API_KEY as a secret
+// Deploy this to Cloudflare Workers and set secrets:
+//   OPENAI_API_KEY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+
+const S3_BUCKET = 'portfolio-chat-004385136011-us-east-1-an';
+const S3_REGION = 'us-east-1';
 
 const SYSTEM_PROMPT = `You ARE Siddhi Kiran Bajracharya. Speak in first person ("I", "my", "me"). You're chatting with visitors on your portfolio website. Be friendly, casual, and conversational — like texting a colleague. Keep responses concise (2-3 sentences unless more detail is asked for).
 
@@ -87,7 +91,6 @@ function isRateLimited(ip) {
   const now = Date.now();
   const entry = rateLimitMap.get(ip);
 
-  // Clean up old entries periodically
   if (rateLimitMap.size > 10000) {
     for (const [key, val] of rateLimitMap) {
       if (now - val.start > RATE_WINDOW_MS) rateLimitMap.delete(key);
@@ -113,6 +116,80 @@ function corsHeaders(origin) {
   };
 }
 
+// ── AWS Signature V4 for S3 uploads ──
+
+async function hmac(key, message) {
+  const cryptoKey = await crypto.subtle.importKey(
+    'raw',
+    typeof key === 'string' ? new TextEncoder().encode(key) : key,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  return new Uint8Array(await crypto.subtle.sign('HMAC', cryptoKey, new TextEncoder().encode(message)));
+}
+
+async function sha256(message) {
+  const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message));
+  return [...new Uint8Array(buffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function getSignatureKey(secretKey, dateStamp, region, service) {
+  let key = await hmac('AWS4' + secretKey, dateStamp);
+  key = await hmac(key, region);
+  key = await hmac(key, service);
+  key = await hmac(key, 'aws4_request');
+  return key;
+}
+
+async function uploadToS3(key, body, env) {
+  const now = new Date();
+  const dateStamp = now.toISOString().slice(0, 10).replace(/-/g, '');
+  const amzDate = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const host = `${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com`;
+
+  const payloadHash = await sha256(body);
+  const canonicalHeaders = `host:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+  const signedHeaders = 'host;x-amz-content-sha256;x-amz-date';
+
+  const canonicalRequest = [
+    'PUT',
+    '/' + key,
+    '',
+    canonicalHeaders,
+    signedHeaders,
+    payloadHash,
+  ].join('\n');
+
+  const credentialScope = `${dateStamp}/${S3_REGION}/s3/aws4_request`;
+  const stringToSign = [
+    'AWS4-HMAC-SHA256',
+    amzDate,
+    credentialScope,
+    await sha256(canonicalRequest),
+  ].join('\n');
+
+  const signingKey = await getSignatureKey(env.AWS_SECRET_ACCESS_KEY, dateStamp, S3_REGION, 's3');
+  const signatureBytes = await hmac(signingKey, stringToSign);
+  const signature = [...signatureBytes].map(b => b.toString(16).padStart(2, '0')).join('');
+
+  const authorization = `AWS4-HMAC-SHA256 Credential=${env.AWS_ACCESS_KEY_ID}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+
+  const res = await fetch(`https://${host}/${key}`, {
+    method: 'PUT',
+    headers: {
+      'Host': host,
+      'x-amz-date': amzDate,
+      'x-amz-content-sha256': payloadHash,
+      'Authorization': authorization,
+      'Content-Type': 'application/json',
+    },
+    body: body,
+  });
+
+  return res.ok;
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
@@ -135,7 +212,27 @@ export default {
     }
 
     try {
-      const { messages } = await request.json();
+      const { messages, visitor, sessionId, turnstileToken } = await request.json();
+
+      // Verify Turnstile on first message of a session
+      if (turnstileToken && env.TURNSTILE_SECRET_KEY) {
+        const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            secret: env.TURNSTILE_SECRET_KEY,
+            response: turnstileToken,
+            remoteip: clientIP,
+          }),
+        });
+        const verifyData = await verifyRes.json();
+        if (!verifyData.success) {
+          return new Response(JSON.stringify({ error: 'Captcha verification failed.' }), {
+            status: 403,
+            headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+          });
+        }
+      }
 
       if (!messages || !Array.isArray(messages) || messages.length === 0 || messages.length > 20) {
         return new Response(JSON.stringify({ error: 'Invalid messages' }), {
@@ -178,7 +275,26 @@ export default {
         });
       }
 
-      return new Response(JSON.stringify({ reply: data.choices[0].message.content }), {
+      const reply = data.choices[0].message.content;
+
+      // Save chat session to S3 (fire and forget — don't block the response)
+      if (visitor && sessionId && env.AWS_ACCESS_KEY_ID) {
+        const date = new Date().toISOString().slice(0, 10);
+        const s3Key = `chats/${date}/${sessionId}.json`;
+        const fullChat = [...sanitizedMessages, { role: 'assistant', content: reply }];
+        const logData = JSON.stringify({
+          sessionId,
+          visitor: { name: visitor.name || '', email: visitor.email || '' },
+          ip: clientIP,
+          timestamp: new Date().toISOString(),
+          messages: fullChat,
+        }, null, 2);
+
+        // Don't await — let it happen in the background
+        uploadToS3(s3Key, logData, env).catch(() => {});
+      }
+
+      return new Response(JSON.stringify({ reply }), {
         headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
       });
     } catch (e) {

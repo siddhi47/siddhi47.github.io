@@ -287,7 +287,7 @@ export default {
 
       const reply = data.choices[0].message.content;
 
-      // Save chat session to S3 (fire and forget — don't block the response)
+      // Save chat session to S3 (fire and forget)
       if (visitor && sessionId && env.AWS_ACCESS_KEY_ID) {
         const date = new Date().toISOString().slice(0, 10);
         const s3Key = `chats/${date}/${sessionId}.json`;
@@ -300,7 +300,6 @@ export default {
           messages: fullChat,
         }, null, 2);
 
-        // Don't await — let it happen in the background
         uploadToS3(s3Key, logData, env).catch(() => {});
       }
 

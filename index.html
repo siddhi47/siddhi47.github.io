@@ -593,6 +593,87 @@
       height: 14px;
     }
 
+    /* ── Blog ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .blog-cover {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: var(--bg-card-hover);
+    }
+
+    .blog-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .blog-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .blog-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .blog-excerpt {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .blog-read-more {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .blog-loading, .blog-empty {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 2rem 0;
+      grid-column: 1 / -1;
+    }
+
+    .blog-view-all {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Contact ── */
     .contact-section {
       text-align: center;
@@ -906,6 +987,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#blog">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0.75rem">
@@ -925,6 +1007,7 @@
   <a href="#skills" onclick="closeMenu()">Skills</a>
   <a href="#experience" onclick="closeMenu()">Experience</a>
   <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#blog" onclick="closeMenu()">Blog</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
@@ -1175,6 +1258,20 @@
   </div>
 </section>
 
+<!-- Blog -->
+<section id="blog">
+  <div class="container">
+    <p class="section-label">What I Write</p>
+    <h2 class="section-title">Blog</h2>
+    <div class="blog-grid" id="blogGrid">
+      <p class="blog-loading">Loading posts...</p>
+    </div>
+    <div class="blog-view-all">
+      <a href="https://siddhibajracharya.hashnode.dev" target="_blank" class="btn btn-outline" style="font-size:0.9rem;padding:0.7rem 1.5rem">View All Posts</a>
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section class="contact-section" id="contact">
   <div class="container">
@@ -1278,6 +1375,61 @@
 </div>
 
 <script>
+  // ── Blog Feed ──
+  (async function loadBlog() {
+    const grid = document.getElementById('blogGrid');
+    try {
+      const res = await fetch('https://gql.hashnode.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: `{
+            publication(host: "siddhibajracharya.hashnode.dev") {
+              posts(first: 6) {
+                edges {
+                  node {
+                    title
+                    brief
+                    url
+                    publishedAt
+                    coverImage { url }
+                  }
+                }
+              }
+            }
+          }`
+        }),
+      });
+      const data = await res.json();
+      const posts = data?.data?.publication?.posts?.edges || [];
+
+      if (posts.length === 0) {
+        grid.innerHTML = '<p class="blog-empty">No posts yet — check back soon!</p>';
+        return;
+      }
+
+      grid.innerHTML = posts.map(({ node: p }) => {
+        const date = new Date(p.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const cover = p.coverImage?.url
+          ? `<img src="${p.coverImage.url}" alt="" class="blog-cover" loading="lazy" />`
+          : '';
+        const excerpt = p.brief ? p.brief.slice(0, 120) + '...' : '';
+        return `
+          <a href="${p.url}" target="_blank" class="blog-card">
+            ${cover}
+            <div class="blog-body">
+              <p class="blog-date">${date}</p>
+              <h3 class="blog-title">${p.title}</h3>
+              <p class="blog-excerpt">${excerpt}</p>
+              <p class="blog-read-more">Read more →</p>
+            </div>
+          </a>`;
+      }).join('');
+    } catch (e) {
+      grid.innerHTML = '<p class="blog-empty">Could not load posts.</p>';
+    }
+  })();
+
   // ── Chat Widget ──
   // IMPORTANT: Replace this URL with your deployed Cloudflare Worker URL
   const CHAT_API_URL = 'https://portfolio-chat.siddhi47.workers.dev';

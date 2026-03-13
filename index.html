@@ -41,7 +41,8 @@
     "sameAs": [
       "https://github.com/siddhi47",
       "https://www.linkedin.com/in/siddhi-kiran-b-a6101b139",
-      "https://www.instagram.com/phatassgrapher/"
+      "https://www.instagram.com/phatassgrapher/",
+      "https://scholar.google.com/citations?user=MnXf_i8AAAAJ&hl=en"
     ],
     "knowsAbout": ["Machine Learning", "Computer Vision", "MLOps", "Python", "PyTorch", "Kubernetes", "AWS", "Go"]
   }
@@ -685,6 +686,66 @@
       .blog-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── Publications ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .pub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color var(--transition), transform var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .pub-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .pub-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--accent-glow);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pub-icon svg { color: var(--accent); }
+
+    .pub-content { flex: 1; }
+
+    .pub-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+
+    .pub-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pub-venue {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
     /* ── Contact ── */
     .contact-section {
       text-align: center;
@@ -999,6 +1060,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Publications</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -1019,6 +1081,7 @@
   <a href="#skills" onclick="closeMenu()">Skills</a>
   <a href="#experience" onclick="closeMenu()">Experience</a>
   <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#publications" onclick="closeMenu()">Publications</a>
   <a href="#blog" onclick="closeMenu()">Blog</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
@@ -1266,6 +1329,59 @@
         </div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- Publications -->
+<section id="publications">
+  <div class="container">
+    <p class="section-label">Research</p>
+    <h2 class="section-title">Publications</h2>
+    <div class="pub-list">
+
+      <a href="https://doi.org/10.1109/CAI54212.2023.00074" target="_blank" class="pub-card">
+        <div class="pub-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="pub-content">
+          <h3 class="pub-title">Deep Spectral Features to Detect Atrial Fibrillation using Single-Lead ECG Signals</h3>
+          <p class="pub-venue">IEEE Conference on Artificial Intelligence (CAI), 2023</p>
+          <div class="pub-meta">
+            <span>DOI: 10.1109/CAI54212.2023.00074</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://doi.org/10.1007/978-981-97-2720-9" target="_blank" class="pub-card">
+        <div class="pub-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="pub-content">
+          <h3 class="pub-title">Cracking the Machine Learning Code: Technicality or Innovation?</h3>
+          <p class="pub-venue">Springer, 2024</p>
+          <div class="pub-meta">
+            <span>DOI: 10.1007/978-981-97-2720-9</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=MnXf_i8AAAAJ&citation_for_view=MnXf_i8AAAAJ:qjMakFHDy7sC" target="_blank" class="pub-card">
+        <div class="pub-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="pub-content">
+          <h3 class="pub-title">A Hybrid Transformer Model for Robust Multimodal Emotion Recognition</h3>
+          <p class="pub-venue">Springer Nature — Data Analytics and Learning: Proceedings of DAL 2024, 2025</p>
+          <div class="pub-meta">
+            <span>S. Bajracharya, D. Ghoshroy, R. Rizk, KC Santosh</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://scholar.google.com/citations?user=MnXf_i8AAAAJ&hl=en" target="_blank" class="btn btn-outline" style="font-size:0.9rem;padding:0.7rem 1.5rem">View Google Scholar Profile</a>
     </div>
   </div>
 </section>
